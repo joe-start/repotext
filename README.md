@@ -16,16 +16,53 @@ RepoText is an open-source tool that packs your entire repository into a single,
 - Dependency analysis
 - Diff-style output for changes since the last pack
 
-## Installation
+## Quick Start (No Installation)
+
+To run RepoText without installation:
 
 1. Clone the repository:
+git clone https://github.com/yourusername/repotext.git
+cd repotext
 
+2. Run directly using Python:
+python3 run.py /path/to/your/repo --output packed_repo.txt
+
+### Using a Virtual Environment (Recommended)
+
+It's recommended to use a virtual environment to avoid conflicts with other Python packages:
+
+1. Create a virtual environment:
+
+python3 -m venv venv
+
+2. Activate the virtual environment:
+
+source venv/bin/activate
+
+3. Install the package:
+
+pip install -e .
+
+4. You can now use RepoText within this virtual environment.
+
+5. When you're done, you can deactivate the virtual environment:
+
+deactivate
+
+## Installation (Optional)
+
+If you prefer to install RepoText:
+
+1. Clone the repository:
 git clone https://github.com/yourusername/repotext.git
 cd repotext
 
 2. Install the package:
 
 pip install -e .
+
+3. Run RepoText:
+repotext /path/to/your/repo --output packed_repo.txt
 
 ## Usage
 

@@ -8,8 +8,9 @@ setup(
     install_requires=[
         'Click',
     ],
-    entry_points='''
-        [console_scripts]
-        repotext=repotext.cli:main
-    ''',
+    entry_points={
+        'console_scripts': [
+            'repotext=repotext.__main__:main',
+        ],
+    },
 )

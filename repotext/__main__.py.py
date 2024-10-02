@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import click
 import os
 from .packer import pack_repository
