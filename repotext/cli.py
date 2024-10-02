@@ -1,5 +1,7 @@
 import click
+import os
 from .packer import pack_repository
+from .compressor import compress_text, decompress_text
 
 @click.command()
 @click.argument('repo_path', type=click.Path(exists=True))

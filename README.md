@@ -18,11 +18,31 @@ RepoText is an open-source tool that packs your entire repository into a single,
 
 ## Installation
 
-(To be added)
+1. Clone the repository:
+
+git clone https://github.com/yourusername/repotext.git
+cd repotext
+
+2. Install the package:
+
+pip install -e .
 
 ## Usage
 
-(To be added)
+To pack a repository: 
+
+repotext /path/to/your/repo --output packed_repo.txt
+
+Options:
+- `--output, -o`: Specify the output file name (default: repotext_output.txt)
+- `--exclude, -e`: Patterns to exclude (can be used multiple times)
+- `--diff`: Generate diff from last pack
+- `--compress`: Compress the output
+- `--format`: Output format (txt, md, or json)
+
+Example with options:
+
+repotext /path/to/your/repo -o packed_repo.txt --exclude ".pyc" --exclude "venv/" --diff --compress --format md
 
 ## Contributing
 

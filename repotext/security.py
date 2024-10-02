@@ -8,7 +8,7 @@ def check_for_sensitive_info(content):
     api_key_pattern = re.compile(r'\b[A-Za-z0-9]{32,40}\b')
     
     # Pattern for potential passwords (any string following "password = " or "password:")
-    password_pattern = re.compile(r'(password\s*[=:]\s*)("\w+"|'\w+'|\w+)')
+    password_pattern = re.compile(r'(password\s*[=:]\s*)("[^"]+"|\'[^\']+\'|\S+)')
     
     # Replace API keys
     content = api_key_pattern.sub('[API_KEY_REDACTED]', content)
