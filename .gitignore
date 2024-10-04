@@ -99,3 +99,10 @@ ENV/
 # IDE settings
 .vscode/
 .idea/
+
+# RepoText output
+RepoText-output.txt
+*.txt
+
+# macOS system files
+.DS_Store
