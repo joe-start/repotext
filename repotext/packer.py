@@ -4,7 +4,7 @@ from .security import check_for_sensitive_info
 from .tokenizer import count_tokens
 from .diff_generator import generate_diff
 from .compressor import compress_text
-from .utils import get_file_order, analyze_dependencies
+from .utils import get_file_order, analyze_dependencies, get_project_structure
 
 def pack_repository(repo_path, output, exclude, diff, compress, format):
     packed_content = []
@@ -14,19 +14,25 @@ def pack_repository(repo_path, output, exclude, diff, compress, format):
     file_order = get_file_order(repo_path)
     
     for root, dirs, files in os.walk(repo_path):
-        for file in file_order:
-            if any(file.endswith(ext) for ext in ['.py', '.js', '.java', '.cpp']):  # Add more extensions as needed
-                file_path = os.path.join(root, file)
+        # Exclude version control directories
+        dirs[:] = [d for d in dirs if d not in ['.git', '.svn', '.hg']]
+        
+        for file in files:
+            if any(file.endswith(ext) for ext in ['.py', '.js', '.java', '.cpp', '.md', '.txt', '.json', '.yaml', '.yml']):
+                file_path = os.path.relpath(os.path.join(root, file), repo_path)
                 if not any(file_path.startswith(ex) for ex in exclude):
-                    content = read_file(file_path)
+                    content = read_file(os.path.join(root, file))
                     safe_content = check_for_sensitive_info(content)
                     tokens = count_tokens(safe_content)
                     total_tokens += tokens
                     packed_content.append(f"File: {file_path}\nTokens: {tokens}\n\n{safe_content}\n\n")
 
     # Add project structure and dependency analysis
-    packed_content.insert(0, f"Project Structure:\n{get_project_structure(repo_path)}\n\n")
-    packed_content.insert(1, f"Dependency Analysis:\n{analyze_dependencies(repo_path)}\n\n")
+    project_structure = get_project_structure(repo_path)
+    packed_content.insert(0, f"Project Structure:\n{project_structure}\n\n")
+    
+    dependencies = analyze_dependencies(repo_path)
+    packed_content.insert(1, f"Dependency Analysis:\n{', '.join(dependencies)}\n\n")
 
     if diff:
         packed_content = generate_diff(packed_content)
