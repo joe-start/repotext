@@ -4,6 +4,7 @@ import click
 import os
 from .packer import pack_repository
 from .compressor import compress_text, decompress_text
+import traceback
 
 @click.command()
 @click.argument('repo_path', type=click.Path(exists=True), default='.')
@@ -20,6 +21,8 @@ def main(repo_path, output, exclude, diff, compress, format):
         click.echo(f"Repository packed successfully: {result}")
     except Exception as e:
         click.echo(f"Error: {str(e)}", err=True)
+        click.echo("Traceback:", err=True)
+        click.echo(traceback.format_exc(), err=True)
 
 if __name__ == '__main__':
     main()

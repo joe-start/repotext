@@ -12,7 +12,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/yourusername/repotext",
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests*', 'venv']),
     include_package_data=True,
     install_requires=[
         'Click>=8.0.3',

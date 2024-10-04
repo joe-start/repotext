@@ -23,6 +23,9 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+*.egg-info/
+dist/
+build/
 
 # PyInstaller
 *.manifest
@@ -83,6 +86,10 @@ env/
 venv/
 ENV/
 
+# Virtual environment
+venv/
+.venv/
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -106,3 +113,7 @@ RepoText-output.txt
 
 # macOS system files
 .DS_Store
+
+# Python cache
+__pycache__/
+*.pyc

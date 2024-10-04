@@ -1,6 +1,21 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
 def read_file(file_path):
-    with open(file_path, 'r') as file:
-        return file.read()
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            return file.read()
+    except UnicodeDecodeError:
+        try:
+            with open(file_path, 'r', encoding='iso-8859-1') as file:
+                return file.read()
+        except Exception as e:
+            logger.error(f"Error reading file {file_path} with ISO-8859-1 encoding: {str(e)}")
+            return f"Error reading file: {file_path}"
+    except Exception as e:
+        logger.error(f"Error reading file {file_path}: {str(e)}")
+        return f"Error reading file: {file_path}"
 
 def write_output(content, output_file, format):
     header = """
